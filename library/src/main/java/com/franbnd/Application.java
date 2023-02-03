@@ -67,6 +67,8 @@ public class Application {
         }catch(SQLException e){
             e.printStackTrace();
         }
+
+        System.out.println("Running App");
     }
 }
 
