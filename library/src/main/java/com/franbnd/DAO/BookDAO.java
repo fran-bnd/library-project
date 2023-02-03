@@ -1,9 +1,7 @@
 package com.franbnd.DAO;
 
-package Application.DAO;
-
-import Application.Util.ConnectionUtil;
-import Application.Model.Book;
+import com.franbnd.Util.ConnectionUtil;
+import com.franbnd.Model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,8 +23,7 @@ import java.util.List;
  */
 public class BookDAO {
     /**
-     * TODO: retrieve all books from the Book table.
-     * You only need to change the sql String.
+     * Retrieve all books from the Book table.
      * @return all Authors.
      */
     public List<Book> getAllBooks(){
@@ -51,8 +48,7 @@ public class BookDAO {
     }
 
     /**
-     * TODO: retrieve an book from the Book table, identified by its id.
-     * You only need to change the sql String and leverage PreparedStatement's setString and setInt methods.
+     *Retrieve an book from the Book table, identified by its id.
      * @return a book identified by id.
      */
     public Book getBookByIsbn(int isbn){
@@ -80,11 +76,10 @@ public class BookDAO {
     }
 
     /**
-     * TODO: insert an book into the Book table.
+     * Insert an book into the Book table.
      * Unlike some of the other insert problems, the primary key here will be provided by the client as part of the
      * Book object. Given the specific nature of an ISBN as both a numerical organization of books outside of this
      * database, and as a primary key, it would make sense for the client to submit an ISBN when submitting a book.
-     * You only need to change the sql String and leverage PreparedStatement's setString and setInt methods.
      */
     public Book insertBook(Book book){
         Connection connection = ConnectionUtil.getConnection();
@@ -108,8 +103,7 @@ public class BookDAO {
         return null;
     }
     /**
-     * TODO: retrieve all books from the Book table with a book_count over zero.
-     * You only need to change the sql String and leverage PreparedStatement's setString and setInt methods.
+     * Retrieve all books from the Book table with a book_count over zero.
      * @returnall books with book count > 0.
      */
     public List<Book> getBooksWithBookCountOverZero(){

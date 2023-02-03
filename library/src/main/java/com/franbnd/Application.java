@@ -1,7 +1,7 @@
 package com.franbnd;
 
-import Application.Controller.LibraryController;
-import Application.Util.ConnectionUtil;
+import com.franbnd.Controller.LibraryController;
+import com.franbnd.Util.ConnectionUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

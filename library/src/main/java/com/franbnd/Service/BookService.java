@@ -2,8 +2,8 @@ package com.franbnd.Service;
 
 import java.util.List;
 
-import Application.DAO.BookDAO;
-import Application.Model.Book;
+import com.franbnd.DAO.BookDAO;
+import com.franbnd.Model.Book;
 
 /**
  * The purpose of a Service class is to contain "business logic" that sits between the web layer (controller) and

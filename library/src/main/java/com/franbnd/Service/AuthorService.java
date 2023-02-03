@@ -1,7 +1,7 @@
 package com.franbnd.Service;
 
-import Application.Model.Author;
-import Application.DAO.AuthorDAO;
+import com.franbnd.Model.Author;
+import com.franbnd.DAO.AuthorDAO;
 
 import java.util.List;
 
