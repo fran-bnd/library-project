@@ -14,7 +14,7 @@ import java.util.List;
  * A DAO is a class that mediates the transformation of data between the format of objects in Java to rows in a
  * database. The methods here are mostly filled out, you will just need to add a SQL statement.
  *
- * We may assume that the database has already created a table named 'book'.
+ * Assume that the database has already created a table named 'book'.
  * It contains similar values as the Author class:
  * isbn, which is of type int and is a primary key,
  * author_id, which is of type int, and is a foreign key associated with the column 'id' of 'author',
@@ -30,7 +30,7 @@ public class BookDAO {
         Connection connection = ConnectionUtil.getConnection();
         List<Book> books = new ArrayList<>();
         try {
-            //Write SQL logic here
+            // SQL logic here
             String sql = "select * from Book;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
@@ -54,11 +54,11 @@ public class BookDAO {
     public Book getBookByIsbn(int isbn){
         Connection connection = ConnectionUtil.getConnection();
         try {
-            //Write SQL logic here
+            // SQL logic here
             String sql = "select * from Book where isbn = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            //write preparedStatement's setInt method here.
+            // preparedStatement's setInt method here.
             preparedStatement.setInt(1, isbn);
 
             ResultSet rs = preparedStatement.executeQuery();
@@ -84,11 +84,11 @@ public class BookDAO {
     public Book insertBook(Book book){
         Connection connection = ConnectionUtil.getConnection();
         try {
-            //Write SQL logic here
+            // SQL logic here
             String sql = "insert into Book values (?, ?, ?, ?);";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            //write preparedStatement's setString and setInt methods here.
+            // preparedStatement's setString and setInt methods here.
             preparedStatement.setInt(1, book.getIsbn());
             preparedStatement.setInt(2, book.getAuthor_id());
             preparedStatement.setString(3, book.getTitle());
@@ -110,12 +110,9 @@ public class BookDAO {
         Connection connection = ConnectionUtil.getConnection();
         List<Book> books = new ArrayList<>();
         try {
-            //Write SQL logic here
+            // SQL logic here
             String sql = "select * from Book where copies_available > 0;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            //write preparedStatement's setInt method here.
-            // no need for preparedStatement beacuse is just a select?
 
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
@@ -129,6 +126,9 @@ public class BookDAO {
             System.out.println(e.getMessage());
         }
         return books;
+    }
+
+    public void addBook(Book newBook) {
     }
 }
 

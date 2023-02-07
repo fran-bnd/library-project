@@ -10,8 +10,7 @@ import io.javalin.http.Context;
 
 import java.util.List;
 /**
- * There is no need to modify anything in this class. This class will create a Javalin API with endpoints when the
- * startAPI method is called.
+ * This class will create a Javalin API with endpoints when the startAPI method is called.
  *
  *  You can interact with the Javalin controller by
  *  a) for GET requests, using the CURL command in your terminal (eg curl localhost:8080/flights). you can use post,
@@ -118,7 +117,7 @@ public class LibraryController {
         }
     }
     /**
-     * Handler to retrieve all books. There is no need to change anything in this method.
+     * Handler to retrieve all books. 
      * @param ctx the context object handles information HTTP requests and generates responses within Javalin. It will
      *            be available to this method automatically thanks to the app.put method.
      */
@@ -127,7 +126,7 @@ public class LibraryController {
         ctx.json(books);
     }
     /**
-     * Handler to retrieve all books with a book count over zero. There is no need to change anything in this method.
+     * Handler to retrieve all books with a book count over zero. 
      * @param context the context object handles information HTTP requests and generates responses within Javalin.
      *                It will be available to this method automatically thanks to the app.put method.
      */

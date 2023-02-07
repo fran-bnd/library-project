@@ -1,31 +1,28 @@
 package com.franbnd;
 
 import com.franbnd.Controller.LibraryController;
+import com.franbnd.DAO.*;
+import com.franbnd.Model.*;
 import com.franbnd.Util.ConnectionUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Scanner;
 /**
- * There is no need to modify anything in this class.
  * The main method will start a new Javalin API on the console at localhost:8080.
- * Take a look at the LibraryController class for API documentation as well as instructions for how to
- * access the API endpoints.
+ * LibraryController class for API documentation as well as instructions for how to access the API endpoints.
  */
 public class Application {
-    /**
-     * You can run this main method to run the API.
-     * @param args
-     */
     public static void main(String[] args) {
         databaseSetup();
         LibraryController libraryController = new LibraryController();
         libraryController.startAPI();
     }
     /**
-     * For the purpose of this short exercise, this method will destroy and set up new book and author tables.
-     * This is not a normal way to set up your tables, in real projects you should set up your database
-     * schema in a SQL editor such as DBeaver or DataGrip. Do not change anything in this method.
+     * This method will destroy and set up new book and author tables.
+     * This is not a normal way to set up your tables, in real projects you should set up your database schema in a SQL editor such as DBeaver or DataGrip. 
      */
     public static void databaseSetup(){
         try {
@@ -69,6 +66,36 @@ public class Application {
         }
 
         System.out.println("Running App");
+
+        // User Menu
+        Scanner sc = new Scanner(System.in);
+        BookDAO bookDAO = new BookDAO();
+        boolean shouldLoop = true;
+        while (shouldLoop){
+            System.out.println("--> Choose: add | purchase | exit");
+            List<Book> allBooks = bookDAO.getAllBooks();
+            System.out.println("--> Current books: "+ allBooks);
+            String input = sc.nextLine();
+            if (input.equals("add")){
+                System.out.print("-> Name of book to add: ");
+                String name = sc.nextLine();
+                System.out.print("-> Author of book to add: ");
+                String author = sc.nextLine();
+                Book newBook = new Book();
+                bookDAO.addBook(newBook);
+
+            }else if(input.equals("purchase")){
+                System.out.print("-> Isbn of book to purchase: ");
+                int isbnBook = sc.nextInt();
+                bookDAO.getBookByIsbn(isbnBook);
+                
+            }else if(input.equals("exit")){
+                shouldLoop = false;
+                // will break the while loop next time the while loop condition is checked
+            }
+
+        }
+        sc.close();
     }
 }
 
