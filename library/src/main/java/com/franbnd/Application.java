@@ -1,8 +1,8 @@
 package com.franbnd;
 
 import com.franbnd.Controller.LibraryController;
-import com.franbnd.DAO.*;
 import com.franbnd.Model.*;
+import com.franbnd.Service.BookService;
 import com.franbnd.Util.ConnectionUtil;
 
 import java.sql.Connection;
@@ -19,7 +19,53 @@ public class Application {
         databaseSetup();
         LibraryController libraryController = new LibraryController();
         libraryController.startAPI();
+
+        System.out.println("->  Welcome to the Library App  <-");
+
+        // User Menu
+        Scanner sc = new Scanner(System.in);
+        BookService bookService = new BookService();
+        boolean shouldLoop = true;
+        String input = "";
+
+        while (shouldLoop){
+            
+            System.out.println("--> Choose: add | buy | list | exit");
+            input = sc.nextLine();
+
+            if (input.equals("add")){
+
+                System.out.print("-> Name of book to add: ");
+                String name = sc.nextLine();
+                System.out.print("-> Isbn of book to add: ");
+                int isbn = sc.nextInt();
+                System.out.print("-> Author of book to add: ");
+                int author = sc.nextInt();
+                System.out.print("-> Avialable copies of book to add: ");
+                int copies = sc.nextInt();
+
+                Book newBook = new Book(isbn, author, name, copies);
+                bookService.addBook(newBook);
+
+            }else if(input.equals("buy")){
+                System.out.print("-> Isbn of book to purchase: ");
+                int isbnBook = sc.nextInt();
+                Book bookPurchased = bookService.getBookByIsbnServ(isbnBook);
+                System.out.println("--> Book purchased: "+ bookPurchased);
+            
+            }else if(input.equals("list")){
+                List<Book> allBooks = bookService.getAllBooks();
+                System.out.println("--> List of books: "+ allBooks);    
+
+            }else if(input.equals("exit")){
+                shouldLoop = false;
+                // will break the while loop next time the while loop condition is checked
+            }
+
+        }
+        sc.close();
     }
+
     /**
      * This method will destroy and set up new book and author tables.
      * This is not a normal way to set up your tables, in real projects you should set up your database schema in a SQL editor such as DBeaver or DataGrip. 
@@ -57,46 +103,13 @@ public class Application {
                             "(102, 2, 'mr palomar', 1)," +
                             "(103, 2, 'invisible cities', 3)," +
                             "(104, 3, 'crying of lot 49', 0)," +
-                            "(105, 3, 'mason and dixon', 0)," +
-                            "(106, 4, 'understanding media', 1)," +
-                            "(107, 5, 'critique of pure reason', 7);");
+                            "(105, 3, 'mason and dixon', 0);");
             ps6.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
         }
-
-        System.out.println("Running App");
-
-        // User Menu
-        Scanner sc = new Scanner(System.in);
-        BookDAO bookDAO = new BookDAO();
-        boolean shouldLoop = true;
-        while (shouldLoop){
-            System.out.println("--> Choose: add | purchase | exit");
-            List<Book> allBooks = bookDAO.getAllBooks();
-            System.out.println("--> Current books: "+ allBooks);
-            String input = sc.nextLine();
-            if (input.equals("add")){
-                System.out.print("-> Name of book to add: ");
-                String name = sc.nextLine();
-                System.out.print("-> Author of book to add: ");
-                String author = sc.nextLine();
-                Book newBook = new Book();
-                bookDAO.addBook(newBook);
-
-            }else if(input.equals("purchase")){
-                System.out.print("-> Isbn of book to purchase: ");
-                int isbnBook = sc.nextInt();
-                bookDAO.getBookByIsbn(isbnBook);
-                
-            }else if(input.equals("exit")){
-                shouldLoop = false;
-                // will break the while loop next time the while loop condition is checked
-            }
-
-        }
-        sc.close();
     }
+
 }
 
 

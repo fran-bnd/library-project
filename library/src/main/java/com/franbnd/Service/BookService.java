@@ -64,6 +64,10 @@ public class BookService {
         return bookDAO.getBooksWithBookCountOverZero();
     }
 
+    public Book getBookByIsbnServ(int isbnBook) {
+        return bookDAO.getBookByIsbn(isbnBook);
+    }
+
 }
 
 
